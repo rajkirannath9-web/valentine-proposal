@@ -1,22 +1,127 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Be My Valentine ❤️</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  margin:0;
+  font-family:Poppins,Arial;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  overflow:hidden;
+}
+.hearts span{
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);opacity:0;}
+}
+.container{
+  position:relative;
+  z-index:2;
+  max-width:400px;
+  margin:40px auto;
+  background:#fff;
+  border-radius:20px;
+  padding:15px;
+  text-align:center;
+}
+h1{color:#ff4d6d;}
+.upload{
+  display:flex;
+  justify-content:space-around;
+  margin:10px 0;
+}
+.upload img{
+  width:130px;
+  height:130px;
+  border-radius:15px;
+  object-fit:cover;
+  background:#eee;
+}
+.swiper{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+}
+.slide{
+  min-width:100%;
+  scroll-snap-align:center;
+  padding:20px;
+  font-size:18px;
+}
+button{
+  border:none;
+  padding:10px 20px;
+  border-radius:20px;
+  font-size:18px;
+  margin:10px;
+  cursor:pointer;
+}
+.yes{background:#ff4d6d;color:#fff;}
+.no{background:#ccc;position:relative;}
+</style>
 </head>
+
 <body>
+
+<div class="hearts"></div>
 
 <div class="container">
   <h1>Hey ❤️</h1>
   <p>Will you be my Valentine?</p>
 
-  <div class="buttons">
-    <button id="yes">Yes 💖</button>
-    <button id="no">No 🙈</button>
+  <div class="upload">
+    <div>
+      <input type="file" accept="image/*" onchange="loadImg(event,'me')"><br>
+      <img id="me">
+    </div>
+    <div>
+      <input type="file" accept="image/*" onchange="loadImg(event,'her')"><br>
+      <img id="her">
+    </div>
   </div>
+
+  <div class="swiper">
+    <div class="slide">🌹 You are my favorite chapter.</div>
+    <div class="slide">💖 Life feels better with you.</div>
+    <div class="slide">✨ My smile begins with you.</div>
+    <div class="slide">💕 You + Me = Always.</div>
+    <div class="slide">💘 Every heartbeat says your name.</div>
+    <div class="slide">🌸 Love looks perfect on us.</div>
+    <div class="slide">❤️ So… will you say YES?</div>
+  </div>
+
+  <button class="yes" onclick="yes()">Yes 💍</button>
+  <button class="no" onmouseover="run(this)">No 🙈</button>
 </div>
 
-<script src="script.js"></script>
+<script>
+function loadImg(e,id){
+ document.getElementById(id).src=URL.createObjectURL(e.target.files[0]);
+}
+function run(btn){
+ btn.style.left=Math.random()*80+"%";
+ btn.style.top=Math.random()*80+"%";
+ btn.style.position="absolute";
+}
+function yes(){
+ document.body.innerHTML="<h1 style='color:white;text-align:center;margin-top:40vh;'>YAYYY ❤️<br>Best Valentine Ever 💕</h1>";
+}
+setInterval(()=>{
+ let h=document.createElement("span");
+ h.innerHTML="❤️";
+ h.style.left=Math.random()*100+"vw";
+ h.style.animationDuration=Math.random()*3+2+"s";
+ document.querySelector(".hearts").appendChild(h);
+ setTimeout(()=>h.remove(),5000);
+},300);
+</script>
+
 </body>
 </html>
